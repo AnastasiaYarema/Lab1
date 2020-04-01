@@ -36,6 +36,7 @@ public class MainFragment extends Fragment {
     private EditText lastNameEditText;
     private EditText groupEditText;
     private Button updateButton;
+    private Button logOutButton;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -60,6 +61,28 @@ public class MainFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        firstNameEditText = view.findViewById(R.id.first_name_edit_text);
+        lastNameEditText = view.findViewById(R.id.last_name_edit_text);
+        groupEditText = view.findViewById(R.id.group_edit_text);
+        updateButton = view.findViewById(R.id.update_button);
+        logOutButton = view.findViewById(R.id.logout_button);
+
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validateFields()) {
+                    updateUser();
+                }
+            }
+        });
         
         getUser();
     }

@@ -54,7 +54,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_margin="16dp"
-        android:background="null"
+        android:background="#009900"
         android:text="Logout"
         />
 

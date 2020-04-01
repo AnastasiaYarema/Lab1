@@ -55,6 +55,19 @@ public class SignUpFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
 
+        emailEditText = view.findViewById(R.id.signup_email_edit_text);
+        passwordEditText = view.findViewById(R.id.signup_password_edit_text);
+        confirmPasswordEditText = view.findViewById(R.id.signup_confirm_password_edit_text);
+        signUpButton = view.findViewById(R.id.signup_done_button);
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validateFields()) {
+                    createUser();
+                }
+            }
+        });
     }
 
     private void createUser() {
@@ -62,7 +75,7 @@ public class SignUpFragment extends Fragment {
         String password = passwordEditText.getText().toString();
         final FragmentActivity activity = getActivity();
         final ProgressDialog dialog = ProgressDialog.show(activity, "",
-                "Loading. Please wait...", true);
+                "Loading. Please wait..." + email + ":"+password, true);
         Task<AuthResult> task =  mAuth.createUserWithEmailAndPassword(email, password);
         task.addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
             @Override
